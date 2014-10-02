@@ -1,0 +1,24 @@
+'Template [Tibia Bot Script]
+const ScriptName = "waypoints"
+const Autor = "TibiaStudio"
+const Description = "Ejemplo Waypoint"
+
+
+
+sub config()
+   
+end sub
+
+sub main()
+  if my.online <> 0 then
+     if not my.iswalk then
+        fwalk "32352,32328,7"
+     end if
+  end if
+end sub
+
+sub fwalk(byval texto)
+dim pos
+    pos = split(texto,",")
+     my.walk pos(0),pos(1),pos(2)
+end sub

@@ -1,0 +1,21 @@
+Option Explicit
+
+'Template [Tibia Bot Script]
+const ScriptName = "TibiaStudio"
+const Autor = "TibiaStudio"
+const Description = "Template TibiaStudio"
+
+
+sub config()
+
+end sub
+
+sub main()
+     dim Packet(3)
+       Packet(0) = &H64
+       Packet(1) = &H03
+       Packet(2) = &H05
+
+    my.SendToServer  Packet(0),3
+end sub
+

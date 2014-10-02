@@ -1,0 +1,87 @@
+'Template [Tibia Bot Script]
+const Autor = "AvalonTM"
+const Description = "Ejemplo de Atacke"
+const ScriptName = "monsters"
+dim List1
+dim Button1
+dim Button2
+dim Text1
+dim a 
+dim monster
+dim cCount
+dim mName(999)
+dim cMonter
+
+'AutoLoad
+  cCount= my.readconfig(ScriptName ,"Count")
+
+for a = 1 to cCount
+   monster = my.readconfig(ScriptName ,"monster" & a )
+   addarray monster
+next
+  
+sub config()
+if my.window("Configuracion",5000,3000) then
+    List1 = my.listbox(5,5,200,150)
+    button1 = my.button("funcion1","Agregar",210,20,100,20)
+    button2 = my.button("funcion2","Guardar",210,130,100,20)
+
+    text1 = my.textbox("",210,5,100,5)
+    
+    cCount= my.readconfig(ScriptName ,"Count")
+
+   for a = 1 to cCount
+      monster= my.readconfig(ScriptName ,"monster" & a)
+      call my.additem( List1 ,monster)
+   next
+      
+end if
+
+end sub
+
+sub main()
+dim i 
+if my.online <> 0 then
+    if cMonter <> 0 then  
+       if not my.isatack then
+          for i = 1 to cMonter
+              my.atack mName(i)
+          next
+      end if
+    end if
+end if
+end sub
+
+sub funcion1
+dim i 
+     
+     
+  for i = 1 to cMonter
+     if my.text(text1) = mName(i) or my.text(text1) = "" then
+       exit for 
+       else
+        call my.additem( List1 , my.text(text1) )
+        addarray my.text(text1)
+         my.text(text1) = ""
+     end if
+  next
+end sub
+
+sub funcion2
+dim i 
+cMonte=0
+for i = 1 to my.listcount(List1)
+   my.listindex(List1) = i-1
+   mName(i)= my.listtext(List1)
+   addarray mName(i)
+   call my.saveconfig(ScriptName ,"Count", my.listcount(List1))
+   call my.saveconfig(ScriptName ,"monster" & i,mName(i))
+next
+end sub    
+
+sub addarray(byval tName)
+     if tName <> "" then
+        cMonter=cMonter+1 
+        mName(cMonter)= tName
+     end if
+end sub
