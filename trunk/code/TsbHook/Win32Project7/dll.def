@@ -1,0 +1,3 @@
+EXPORTS
+	InitConnect @1
+	ReadFile @2

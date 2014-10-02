@@ -1,0 +1,55 @@
+'Autor: AvalonTM
+const Autor = "AvalonTM"
+Const Description = "ejemplo de Spell"
+Const ScriptName = "Spells"
+
+dim Labelhp
+dim txthp
+dim LabelSpell
+dim txtspell
+dim spell
+dim hp
+dim IsUnload
+
+hp = my.readconfig(ScriptName,"hp")
+spell = my.readconfig(ScriptName,"spell")
+ 
+sub config()
+if my.window("Configuracion") then
+    Labelhp = my.label("Hp:",5,8)
+    txthp = my.textbox("",35,5,100,5)
+    LabelSpell = my.label("Spell:",5,28)
+    txtspell = my.textbox("",35,25,100,5)
+
+    boton = my.button("funcion1","guardar",150,5,100,20)
+    my.text(txthp) = my.readconfig(ScriptName,"hp")
+    my.text(txtspell) = my.readconfig(ScriptName,"spell")
+    hp = my.text(txthp)
+    spell = my.text(txtspell)
+
+end if
+end sub
+
+sub main()
+     my.doevent
+    if my.online <> 0 then
+        if my.hp < clng(hp) then
+            call my.say(spell)
+            my.wait 1
+        end if
+    end if
+    my.wait 1 
+
+end sub
+
+sub terminate()
+    IsUnload = true
+end sub
+
+sub funcion1()
+    hp = my.text(txthp)
+    spell = my.text(txtspell)
+    call my.saveconfig(ScriptName,"hp",hp)
+    call my.saveconfig(ScriptName,"spell",spell)
+    msgbox "Configuracion Guardada!"
+end sub
